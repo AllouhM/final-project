@@ -1,0 +1,116 @@
+nav.navbar,
+.navbar-default {
+	background-color: orange;
+	height: 70px;
+}
+
+.navbar-default {
+	background-image: none;
+	border: none;
+	border-radius: 0;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: white;
+}
+
+.navbar-default .navbar-brand {
+	color: rgb(223, 238, 223);
+}
+
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:hover {
+	color: black;
+	background-color: transparent;
+}
+
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+	color: rgb(25, 27, 4);
+	background-color: transparent;
+}
+.select {
+	padding: 20px;
+	width: 50%;
+	margin-left: 25%;
+}
+.form {
+	display: flex;
+
+	padding: 20px;
+	width: 75%;
+	margin-left: 10%;
+	margin-top: 10%;
+}
+.form-label {
+	margin-top: 10px;
+	width: 150px;
+}
+
+.hoda {
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+}
+div.panel-body {
+	font-size: 16px;
+}
+
+div.panel-title {
+	padding: 3px;
+
+	font-size: 20px;
+	color: darkgoldenrod;
+}
+
+div#accordion-example.panel-group {
+	margin-left: 4px;
+	width: 100%;
+}
+.list-item {
+	width: 25%;
+	display: flex;
+	background-color: rgb(199, 214, 213);
+	font-size: 16px;
+	font-family: cursive;
+	padding: 10px;
+	margin: 3px;
+}
+.LI-span {
+	font-weight: bold;
+}
+.description-par {
+	text-align: center;
+	font-family: sans-serif;
+}
+.jumbo-container {
+	background-color: rgb(190, 219, 190);
+	border: 1px solid black;
+}
+.list-item-title {
+	font-weight: bold;
+	color: gray;
+}
+.list-group {
+	display: flex;
+}
+.image {
+	margin: auto;
+	margin-top: 20px;
+}
+.slider.carousel.slide {
+	height: 500px;
+}
+.panel {
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+}
+#accordion-uncontrolled-example {
+	margin-top: 10px;
+	font-size: 16px;
+	font-family: cursive;
+}
+.btn.btn-danger {
+	margin-left: 800px;
+}
