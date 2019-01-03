@@ -37,13 +37,19 @@ class DisplayHouses extends Component {
 			.then((data) => this.updateState(data))
 			.catch((err) => console.log(err));
 	};
+
 	render() {
 		const { houses } = this.state;
+		const renderingData = houses.length ? (
+			<House houses={houses} />
+		) : (
+			<p className="no-data">Currently there are no houses available</p>
+		);
 
 		return (
 			<div className="container">
 				<SelectList className="select" changeHandler={this.handleSelectChange} />
-				<House houses={houses} />
+				{renderingData}
 			</div>
 		);
 	}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Home from './components/UA-Structur/Home';
 import Contribute from './components/Contribute';
 import Navigationbar from './components/UA-Structur/Navbar';
@@ -20,7 +21,6 @@ class App extends Component {
 					<Route path="/readme" component={Readme} />
 					<Route path="/houses" component={DisplayHouses} />
 					<Route path="/citychart" component={CityChart} />
-
 					<Route path="/details" component={Details} />
 				</div>
 			</Router>

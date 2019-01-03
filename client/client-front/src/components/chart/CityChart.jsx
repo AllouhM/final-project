@@ -54,20 +54,22 @@ class CityChart extends Component {
 
 		const houseData = sourceData.map((el) => {
 			const { avg_price, storing_date } = el;
-			const date = moment(storing_date).subtract(1, 'days').format('YYYY-MM-DD');
+			const date = moment(storing_date).format('YYYY-MM-DD');
 			return { date, avg_price };
 		});
-		avgPriceSqrArray.push(houseData);
 
+		avgPriceSqrArray.push(houseData);
+		console.log('from con', avgPriceSqrArray);
 		const currentDay = new Date();
 
-		let daysRangeDisplayed = moment(currentDay).subtract(11, 'd').format('YYYY-MM-DD');
+		let daysRangeDisplayed = moment(currentDay).subtract(14, 'd').format('YYYY-MM-DD');
 
 		const days = [];
 		while (moment(daysRangeDisplayed).isBefore(currentDay)) {
 			days.push(daysRangeDisplayed);
 			daysRangeDisplayed = moment(daysRangeDisplayed).add(1, 'days').format('YYYY-MM-DD');
 		}
+		console.log('from con', days);
 		avgPriceSqrArray.forEach((avgArray, index) => {
 			let lastAvgSqr = null;
 			let lastAvgPrice = null;
@@ -91,6 +93,7 @@ class CityChart extends Component {
 			priceData: [ [ 'storingDate', 'AvgPrice' ], ...updatedPriceData ],
 			sqrmData: [ [ 'storingDate', 'avgSqrmPrice' ], ...UpdateSqrmData ]
 		});
+		console.log('from con', updatedPriceData);
 	};
 
 	handleSelectChange = (selectedOption) => {
@@ -103,22 +106,32 @@ class CityChart extends Component {
 	};
 
 	render() {
+		const { priceData, sqrmData } = this.state;
+		const displayPriceChart = priceData.length ? (
+			<DrawChart
+				chartData={this.state.priceData}
+				options={this.state.options}
+				title={`Avg price for the last 30 days in ${this.state.selectedOption.value}`}
+				colros={'red'}
+			/>
+		) : (
+			<p className="no-data"> Sorry no price data available now.... </p>
+		);
+		const displaySqrmChart = sqrmData.length ? (
+			<DrawChart
+				chartData={this.state.sqrmData}
+				options={this.state.options}
+				title={`Avg price per sqrm for the last 30 days in ${this.state.selectedOption.value}`}
+				colros={'blue'}
+			/>
+		) : (
+			<p className="no-data"> Sorry no Square meter price data available now.... </p>
+		);
 		return (
 			<div>
 				<SelectList className="select" changeHandler={this.handleSelectChange} />
-				<h2>{`Price trend in ${this.state.selectedOption.value}`}</h2>
-				<DrawChart
-					chartData={this.state.priceData}
-					options={this.state.options}
-					title={`Avg price for the last 30 days in ${this.state.selectedOption.value}`}
-					colros={'red'}
-				/>
-				<DrawChart
-					chartData={this.state.sqrmData}
-					options={this.state.options}
-					title={`Avg price per sqrm for the last 30 days in ${this.state.selectedOption.value}`}
-					colros={'blue'}
-				/>{' '}
+				<h2 className="price-heading">{`Price trend in ${this.state.selectedOption.value}`}</h2>
+				{displayPriceChart} {displaySqrmChart}
 			</div>
 		);
 	}

@@ -3,7 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const { validateEntries, normalizeRow, getOneCityStatus } = require('./validate-normalize');
+const { validateEntries, normalizeRow, getCitiesStatsObj } = require('./validate-normalize');
+
 const app = express();
 app.use(cors());
 
@@ -19,11 +20,13 @@ const db = mysql.createConnection({
 
 app.post('/upload', (req, res) => {
 	try {
+		// return console.log(req.body.houses);
 		const data = validateEntries(req.body.houses);
 
 		res
 			.json({
-				processed: data.length
+				processed: req.body.houses.length,
+				valid: data.length
 			})
 			.end();
 
@@ -68,7 +71,8 @@ app.post('/upload', (req, res) => {
 				? groupedByCity[house['location'].city].push(house)
 				: ((groupedByCity[house['location'].city] = []), groupedByCity[house['location'].city].push(house)); // create a new array and push
 		});
-		const cityStats = getOneCityStatus(groupedByCity);
+
+		const cityStats = getCitiesStatsObj(groupedByCity);
 
 		if (cityStats.length) {
 			const sql2 =
@@ -95,7 +99,7 @@ app.post('/upload', (req, res) => {
 			);
 		}
 	} catch (err) {
-		console.log(err.message);
+		console.log('mood', err.message);
 		res.status(400).end();
 	}
 });
@@ -111,7 +115,7 @@ app.get(`/citychart`, (req, res) => {
 		`select city, storing_date, avg_price, avgprice_sqrm, currency from city_stats ${queryWhere};`,
 		(err, result, fields) => {
 			if (err) {
-				res.status(400).end();
+				res.send(err).end();
 			}
 			res.json(result);
 		}
@@ -144,7 +148,7 @@ app.get(`/cityname`, (req, res) => {
 const port = process.env.PORT || 3120;
 db.connect((error) => {
 	if (error) {
-		throw error;
+		return error;
 	}
 	app.listen(port, (err) => {
 		console.log(`db is up, app is running at http://localhost:${port}`);

@@ -89,7 +89,7 @@ const normalizeRow = (data, i) => {
 		images: data['images'].toString()
 	};
 };
-const getOneCityStatus = (obj) => {
+const getCitiesStatsObj = (obj) => {
 	let statsPerCity = {
 		city: '',
 		storingDate: '',
@@ -101,7 +101,7 @@ const getOneCityStatus = (obj) => {
 	};
 	let statisticsAllCities = [];
 
-	for (city in obj) {
+	for (let city in obj) {
 		let prices = [];
 		let housesSqrM = [];
 
@@ -118,8 +118,8 @@ const getOneCityStatus = (obj) => {
 		statisticsAllCities.push({
 			...statsPerCity,
 			city: city,
-
-			storingDate: '2018-12-26',
+			// storingDate: new Date(),
+			storingDate: '2018-12-27',
 			propertiesCount: obj[city].length,
 			sumPrice: totalPriceValue,
 			avgPrice: avgPriceValue,
@@ -130,4 +130,4 @@ const getOneCityStatus = (obj) => {
 	return statisticsAllCities;
 };
 
-module.exports = { validateEntries, normalizeRow, getOneCityStatus };
+module.exports = { validateEntries, normalizeRow, getCitiesStatsObj };

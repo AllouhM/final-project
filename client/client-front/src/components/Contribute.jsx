@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 
 class Contribute extends Component {
 	state = {
 		houses: [],
-		api: ''
+		api: '',
+		postResponse: { processed: 0, valid: 0 }
 	};
 
 	housesHandler = (e) => {
@@ -21,6 +23,7 @@ class Contribute extends Component {
 				'Content-Type': 'application/json'
 			}
 		})
+			.then((res) => res.json())
 			.then((res) => this.setState({ postResponse: res }))
 			.catch((err) => console.log(err));
 		this.setState({ houses: [] });
@@ -41,7 +44,9 @@ class Contribute extends Component {
 					headers: {
 						'Content-Type': 'application/json'
 					}
-				});
+				})
+					.then((res) => res.json())
+					.then((res) => this.setState({ postResponse: res }));
 			})
 			.catch((err) => {
 				console.log(err);
@@ -49,13 +54,39 @@ class Contribute extends Component {
 		this.setState({ api: '' });
 	};
 	render() {
+		console.log(this.state.postResponse);
+		const report =
+			this.state.postResponse.processed === 0 ? null : (
+				<div className="cont-report">
+					<h3 className="cont-report-header"> Contribution report</h3>
+					<p className="report-p">
+						Thank you for ypur contribution. Some of the provided houses doesn't meet our contribution
+						conditions. Click button below to read more{' '}
+					</p>
+					<ul className="report-list">
+						<li className="report-item">
+							Number of houses provided : {this.state.postResponse.processed} houses
+						</li>
+						<li className="report-item">
+							Number of <span className="valid">valid</span> houses:
+							{this.state.postResponse.valid} houses
+						</li>
+					</ul>
+
+					<Link to="/readme">
+						<Button bsStyle="info" bsSize="large" block>
+							Read contribution instructions
+						</Button>
+					</Link>
+				</div>
+			);
 		return (
-			<div>
-				<Form className="form" onSubmit={this.addHouses}>
+			<div className="container">
+				<Form className="file-form" onSubmit={this.addHouses}>
 					<FormGroup />
-					<ControlLabel className="form-label"> Valid json file</ControlLabel>
+					<ControlLabel className="file-form-label"> Valid json file</ControlLabel>
 					<FormControl
-						className="form-control"
+						className="file-form-control"
 						type="textarea"
 						value={this.state.houses}
 						placeholder="Enter JSON file"
@@ -66,11 +97,11 @@ class Contribute extends Component {
 					</Button>
 				</Form>
 
-				<Form className="form">
+				<Form className="api-form">
 					<FormGroup />
-					<ControlLabel className="form-label"> Valid json API</ControlLabel>
+					<ControlLabel className="api-form-label"> Valid json API</ControlLabel>
 					<FormControl
-						className="form-control"
+						className="api-form-control"
 						type="textarea"
 						value={this.state.api}
 						placeholder="Enter JSON API"
@@ -80,6 +111,7 @@ class Contribute extends Component {
 						Add contribution{' '}
 					</Button>
 				</Form>
+				{report}
 			</div>
 		);
 	}

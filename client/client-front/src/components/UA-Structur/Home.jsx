@@ -5,14 +5,16 @@ import { Grid, Jumbotron, Button } from 'react-bootstrap';
 class Home extends Component {
 	render() {
 		return (
-			<Grid>
-				<Jumbotron>
-					<h1>Welcome to our Properties open source platform</h1>
-				</Jumbotron>
-				<Link to="/houses">
-					<Button bsStyle="primary"> See properties per city </Button>
-				</Link>
-			</Grid>
+			<div className="container">
+				<Grid>
+					<Jumbotron>
+						<h1>Welcome to our Properties open source platform</h1>
+					</Jumbotron>
+					<Link to="/houses">
+						<Button bsStyle="primary"> See properties per city </Button>
+					</Link>
+				</Grid>
+			</div>
 		);
 	}
 }

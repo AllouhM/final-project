@@ -24,7 +24,10 @@ class SelectList extends Component {
 	};
 
 	getCitiesName = () => {
-		fetch(`http://localhost:3120/cityname`).then((res) => res.json()).then((res) => this.groupCitiesForSelect(res));
+		fetch(`http://localhost:3120/cityname`)
+			.then((res) => res.json())
+			.then((res) => this.groupCitiesForSelect(res))
+			.catch((err) => console.log(err));
 	};
 	render() {
 		return (
