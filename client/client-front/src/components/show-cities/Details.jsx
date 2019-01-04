@@ -24,19 +24,17 @@ class Details extends Component {
 
 			return (
 				<Carousel.Item>
-					<img className="image" width={700} height={500} key={key} alt={ImageAlt} src={image} />
-					<Carousel.Caption>
-						<h3>First slide label</h3>
-						<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-					</Carousel.Caption>
+					<img className="image" width={600} height={500} key={key} alt={ImageAlt} src={image} />
 				</Carousel.Item>
 			);
 		});
 		return (
 			<div className="container">
-				<Carousel className="slider">{imageItem}</Carousel>
-				<PanelGroup accordion id="accordion-uncontrolled-example" defaultActiveKey=" ">
-					<Panel className="panel" eventKey="1">
+				<div className="slider-main">
+					<Carousel>{imageItem}</Carousel>
+				</div>
+				<PanelGroup accordion id="accordion-uncontrolled-example" defaultActiveKey="3">
+					<Panel className="panel1-width" eventKey="1">
 						<Panel.Heading>
 							<Panel.Title toggle> House location</Panel.Title>
 						</Panel.Heading>
@@ -66,7 +64,7 @@ class Details extends Component {
 							</ListGroup>
 						</Panel.Body>
 					</Panel>
-					<Panel className="panel" eventKey="2">
+					<Panel className="panel2-width" eventKey="2">
 						<Panel.Heading>
 							<Panel.Title toggle>House price</Panel.Title>
 						</Panel.Heading>
@@ -77,7 +75,7 @@ class Details extends Component {
 							<span className="list-item-title">Currency: </span> {house.price_currency}
 						</Panel.Body>
 					</Panel>
-					<Panel className="panel" eventKey="3">
+					<Panel className="panel3-width" eventKey="3">
 						<Panel.Heading>
 							<Panel.Title toggle>House area</Panel.Title>
 						</Panel.Heading>
@@ -94,7 +92,7 @@ class Details extends Component {
 							<span className="list-item-title">Number of rooms: </span> {house.size_rooms}
 						</Panel.Body>
 					</Panel>
-					<Panel className="panel" eventKey="4">
+					<Panel className="panel4-width" eventKey="4">
 						<Panel.Heading>
 							<Panel.Title toggle>Other info</Panel.Title>
 						</Panel.Heading>
@@ -109,6 +107,8 @@ class Details extends Component {
 						</Panel.Body>
 					</Panel>
 				</PanelGroup>
+				<h4 className="description"> Property description...</h4>
+				<p className=" description-par"> {house.description}</p>
 				<Link to="/houses">
 					<Button bsStyle="danger">Back to houses list</Button>
 				</Link>

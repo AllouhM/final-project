@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Jumbotron, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 class House extends Component {
 	addDecimal = (num) => {
@@ -13,26 +13,23 @@ class House extends Component {
 			let priceDecimal = this.addDecimal(house.price_value);
 
 			return (
-				<Jumbotron className="jumbo-container" key={key}>
-					<h3>{house.title}</h3>
-					<ListGroup className="list-group">
-						<ListGroupItem className="list-item">
+				<div className="each-house" key={key}>
+					<h5 className="house-title">{house.title}</h5>
+					<ul className="list-group">
+						<li className="list-item">
+							{' '}
 							<span className="list-item-title">Countey:</span> {house.location_country}
-						</ListGroupItem>
-						<ListGroupItem className="list-item">
-							<span className="list-item-title">City:</span> {house.location_city}{' '}
-						</ListGroupItem>
-						<ListGroupItem className="list-item">
-							<span className="list-item-title">Address:</span> {house.location_address}{' '}
-						</ListGroupItem>
-						<ListGroupItem className="list-item">
+						</li>
+						<li className="list-item">
+							<span className="list-item-title">City:</span> {house.location_city}
+						</li>
+						<li className="list-item">
+							<span className="list-item-title">Address:</span> {house.location_address}
+						</li>
+						<li className="list-item">
 							<span className="list-item-title">Price:</span> {priceDecimal} {house.price_currency}
-						</ListGroupItem>
-					</ListGroup>
-					<p className=" description-par">
-						{' '}
-						<span className="LI-span">About property :</span> {house.description}
-					</p>
+						</li>
+					</ul>
 					<Link
 						to={{
 							pathname: '/Details',
@@ -43,10 +40,11 @@ class House extends Component {
 					>
 						<Button bsStyle="danger">More details about property</Button>
 					</Link>
-				</Jumbotron>
+				</div>
+				// </div>
 			);
 		});
-		return <div className="container">{eachHouse}</div>;
+		return <div id="show-houses-container">{eachHouse}</div>;
 	}
 }
 export default House;

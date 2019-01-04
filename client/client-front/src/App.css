@@ -1,177 +1,262 @@
 .navbar-inverse {
+	/* need*/
 	background-image: linear-gradient(to bottom, #3c3c3c 0, #bc5a45 100%);
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-color: #222;
 	margin-top: 10px;
-	height: 70px;
+	overflow: hidden;
 	padding: 10px;
 	font-size: 16px;
 }
 .navbar-right {
+	/* need*/
 	margin-right: 10px;
 }
-/* nav.navbar,
-.navbar-default {
-	background-color: orange;
-	height: 70px;
+.page-header {
+	/* need*/
+	border-top: 1px solid #3c3c3c;
+	border-bottom: 1px solid #3c3c3c;
+	padding: 2px;
 }
-
-.navbar-default {
-	background-image: none;
-	border: none;
-	border-radius: 0;
+.page-header h1 {
+	/* need*/
+	color: rgb(5, 19, 0);
 }
-
-.navbar-default .navbar-nav > li > a {
-	color: white;
+.notfound-header1 {
+	/* need*/
+	color: rgb(253, 19, 0);
+	text-align: center;
 }
-
-.navbar-default .navbar-brand {
-	color: rgb(223, 238, 223);
+.notfound-header2 {
+	/* need*/
+	color: gray;
+	text-align: center;
 }
-
-.navbar-default .navbar-brand:focus,
-.navbar-default .navbar-brand:hover {
-	color: black;
-	background-color: transparent;
+div.jumbotron {
+	/* need*/
+	background: url("https://www.spiti24.gr/modules/spiti24/images/hero/residential.jpg");
+	height: 350px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
-
-.navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-nav > li > a:hover {
-	color: rgb(25, 27, 4);
-	background-color: transparent;
-} */
-/* .nav navbar.navbar-inverse {
-	background-color: orange;
-} */
+.jumbotron h1 {
+	/* need*/
+	font-size: 18px;
+	font-weight: bold;
+	color: rgba(78, 76, 177, 0.8);
+	margin-top: 260px;
+}
 .select {
+	/* need*/
 	padding: 20px;
 	width: 50%;
 	margin-left: 25%;
 }
+.spinner {
+	/* need */
+	margin-left: 50%;
+	margin-right: 50%;
+}
 .file-form {
-	/* display: flex; */
-
+	/* need*/
 	padding: 20px;
 	width: 75%;
 	margin-left: 10%;
 }
 .file-form-label {
+	/* need*/
 	margin-left: 15px;
 	font-size: 20px;
 }
 .file-form-control {
+	/* need*/
 	height: 150px;
 	margin: 10px;
 }
 
 .btn.btn-success {
+	/* need*/
 	margin-left: 15px;
 }
 .api-form {
+	/* need*/
 	padding: 20px;
 	width: 75%;
 	margin-left: 10%;
 }
 .api-form-label {
+	/* need*/
 	margin-left: 15px;
 	font-size: 20px;
 }
 .api-form-control {
+	/* need*/
 	height: 50px;
 	margin: 10px;
 }
-
+.panel.panel-default {
+	/* need*/
+	font-size: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
 div.panel-body {
+	/* need*/
 	font-size: 16px;
 }
 
 div.panel-title {
+	/* need*/
 	padding: 3px;
-
-	font-size: 20px;
-	color: darkgoldenrod;
+	font-weight: bold;
+	font-size: 17px;
+	color: #405d27;
+	text-align: center;
+}
+.panel1-width {
+	/* need*/
+	width: 80%;
+}
+.panel2-width {
+	/* need*/
+	width: 70%;
+}
+.panel3-width {
+	/* need*/
+	width: 60%;
+}
+.panel4-width {
+	/* need*/
+	width: 50%;
 }
 
-div#accordion-example.panel-group {
-	margin-left: 4px;
-	width: 100%;
-}
 .list-item {
-	width: 25%;
-	display: flex;
-	background-color: rgb(199, 214, 213);
+	/* need*/
 	font-size: 16px;
-	font-family: cursive;
 	padding: 10px;
 	margin: 3px;
 }
-.LI-span {
-	font-weight: bold;
-}
-.description-par {
-	text-align: center;
-	font-family: sans-serif;
-}
-.jumbo-container {
+.each-house {
+	/* need*/
+	width: 46%;
+	height: 350px;
 	background-color: white;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border: 1px solid rgba(0, 0, 0, 0.2);
+	margin: 2%;
+	padding: 20px;
 }
 
-/* border: 1px solid black; */
+#show-houses-container {
+	/* need*/
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
 
 .list-item-title {
+	/* need*/
 	font-weight: bold;
 	color: gray;
+	margin-right: 2px;
 }
 .list-group {
-	display: flex;
+	/* need*/
+	list-style: none;
 }
-.image {
-	margin: auto;
-	margin-top: 20px;
-}
-.slider.carousel.slide {
-	height: 500px;
-}
-.panel {
-	width: 70%;
+
+.carousel-inner {
+	/* need*/
+	width: 600px;
+	height: 450px;
 	margin-left: auto;
 	margin-right: auto;
 }
-#accordion-uncontrolled-example {
-	margin-top: 10px;
+
+.image {
+	/* need*/
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+	margin: auto;
+	margin-top: 20px;
+}
+
+.slider.carousel.slide {
+	/* need*/
+	margin-left: auto;
+	margin-right: auto;
+	height: 450px;
+	width: auto;
+}
+.slider-main {
+	/* need*/
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+}
+.description {
+	/* need*/
+	margin-top: 40px;
+	font-weight: bold;
+	text-align: center;
+}
+.description-par {
+	/* need*/
+	text-align: center;
+	font-family: sans-serif;
 	font-size: 16px;
-	font-family: cursive;
+	padding: 5px;
+}
+#accordion-uncontrolled-example {
+	/* need*/
+	margin-top: 10px;
+	font-family: sans-serif;
+}
+.house-title {
+	overflow: initial;
+	font-weight: bold;
+	font-size: 17px;
 }
 .btn.btn-danger {
-	margin-left: 800px;
+	/* need*/
+	position: absolute;
+	margin-bottom: 5px;
+}
+.btn.btn-info {
+	margin-bottom: 5px;
 }
 .cont-report {
+	/* need*/
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 	margin-bottom: 30px;
 }
 .valid {
+	/* need*/
 	font-weight: bold;
 	color: #d64161;
 	font-style: italic;
 }
 .report-list {
+	/* need*/
 	list-style: none;
 }
 .report-item {
+	/* need*/
 	padding: 12px;
 	font-size: 16px;
 }
 .cont-report-header {
+	/* need*/
 	color: gray;
 }
 .report-p {
+	/* need*/
 	font-size: 16px;
 }
 .no-data {
+	/* need*/
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 18px;
@@ -179,7 +264,38 @@ div#accordion-example.panel-group {
 	margin-top: 100px;
 }
 .price-heading {
+	/* need*/
 	color: #bc5a45;
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 720px) {
+	/* need*/
+	.jumbo-container {
+		width: 100%;
+		height: 350px;
+	}
+	.each-house {
+		width: 100%;
+		height: 350px;
+	}
+	.btn.btn-danger {
+		margin-top: auto;
+	}
+	.slider-main {
+		width: auto;
+	}
+	.carousel-inner {
+		width: auto;
+		height: auto;
+	}
+	.image {
+		width: auto;
+	}
+}
+@media screen and (max-width: 1000px) {
+	/* need*/
+	.slider-main {
+		width: auto;
+	}
 }

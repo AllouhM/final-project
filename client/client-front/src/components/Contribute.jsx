@@ -54,7 +54,6 @@ class Contribute extends Component {
 		this.setState({ api: '' });
 	};
 	render() {
-		console.log(this.state.postResponse);
 		const report =
 			this.state.postResponse.processed === 0 ? null : (
 				<div className="cont-report">
@@ -82,6 +81,7 @@ class Contribute extends Component {
 			);
 		return (
 			<div className="container">
+				{report}
 				<Form className="file-form" onSubmit={this.addHouses}>
 					<FormGroup />
 					<ControlLabel className="file-form-label"> Valid json file</ControlLabel>
@@ -111,7 +111,6 @@ class Contribute extends Component {
 						Add contribution{' '}
 					</Button>
 				</Form>
-				{report}
 			</div>
 		);
 	}

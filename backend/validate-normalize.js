@@ -118,8 +118,8 @@ const getCitiesStatsObj = (obj) => {
 		statisticsAllCities.push({
 			...statsPerCity,
 			city: city,
-			// storingDate: new Date(),
-			storingDate: '2018-12-27',
+			storingDate: new Date(),
+			// storingDate: '2018-12-30',
 			propertiesCount: obj[city].length,
 			sumPrice: totalPriceValue,
 			avgPrice: avgPriceValue,

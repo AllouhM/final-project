@@ -6,7 +6,7 @@ class DrawChart extends Component {
 		return (
 			<div className="container">
 				<Chart
-					width={'1100px'}
+					width={'auto'}
 					height={'350px'}
 					chartType="LineChart"
 					loader={<div>Loading Chart</div>}

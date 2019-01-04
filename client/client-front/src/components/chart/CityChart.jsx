@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SelectList from './SelectList';
 import DrawChart from './DrawChart';
+import MDSpinner from 'react-md-spinner';
 import moment from 'moment';
 moment().format();
 
@@ -32,9 +33,9 @@ class CityChart extends Component {
 			}
 		},
 		selectedOption: 'Athens-Center',
-
 		priceData: [],
-		sqrmData: []
+		sqrmData: [],
+		isLoading: false
 	};
 	componentDidMount() {
 		this.handleSelectChange({ value: 'Athens-Center' });
@@ -46,20 +47,23 @@ class CityChart extends Component {
 		const updatedPriceData = [];
 
 		const sqrmData = sourceData.map((el) => {
-			const { avgprice_sqrm, storing_date } = el;
-			const date = moment(storing_date).subtract(1, 'days').format('YYYY-MM-DD');
-			return { date, avgprice_sqrm };
+			const { averageSqrm, storing_date } = el;
+
+			const roundedAvgSqr = Math.round(averageSqrm);
+
+			const date = moment(storing_date).format('YYYY-MM-DD');
+			return { date, roundedAvgSqr };
 		});
 		avgPriceSqrArray.push(sqrmData);
 
 		const houseData = sourceData.map((el) => {
-			const { avg_price, storing_date } = el;
+			const { averagePrice, storing_date } = el;
 			const date = moment(storing_date).format('YYYY-MM-DD');
-			return { date, avg_price };
+			return { date, averagePrice };
 		});
 
 		avgPriceSqrArray.push(houseData);
-		console.log('from con', avgPriceSqrArray);
+
 		const currentDay = new Date();
 
 		let daysRangeDisplayed = moment(currentDay).subtract(14, 'd').format('YYYY-MM-DD');
@@ -69,7 +73,7 @@ class CityChart extends Component {
 			days.push(daysRangeDisplayed);
 			daysRangeDisplayed = moment(daysRangeDisplayed).add(1, 'days').format('YYYY-MM-DD');
 		}
-		console.log('from con', days);
+
 		avgPriceSqrArray.forEach((avgArray, index) => {
 			let lastAvgSqr = null;
 			let lastAvgPrice = null;
@@ -80,8 +84,8 @@ class CityChart extends Component {
 
 			for (let day = min; day <= max; day = moment(day).add(1, 'days').format('YYYY-MM-DD')) {
 				if (day >= avgArray[currentIndex].date) {
-					lastAvgSqr = avgArray[currentIndex].avgprice_sqrm;
-					lastAvgPrice = avgArray[currentIndex].avg_price;
+					lastAvgSqr = avgArray[currentIndex].roundedAvgSqr;
+					lastAvgPrice = avgArray[currentIndex].averagePrice;
 
 					if (currentIndex < avgArray.length - 1) currentIndex++;
 				}
@@ -91,13 +95,13 @@ class CityChart extends Component {
 
 		this.setState({
 			priceData: [ [ 'storingDate', 'AvgPrice' ], ...updatedPriceData ],
-			sqrmData: [ [ 'storingDate', 'avgSqrmPrice' ], ...UpdateSqrmData ]
+			sqrmData: [ [ 'storingDate', 'avgSqrmPrice' ], ...UpdateSqrmData ],
+			isLoading: false
 		});
-		console.log('from con', updatedPriceData);
 	};
 
-	handleSelectChange = (selectedOption) => {
-		this.setState({ selectedOption });
+	handleSelectChange = async (selectedOption) => {
+		await this.setState({ selectedOption, isLoading: true });
 
 		fetch(`http://localhost:3120/citychart?city=${selectedOption.value}`)
 			.then((res) => res.json())
@@ -106,13 +110,15 @@ class CityChart extends Component {
 	};
 
 	render() {
-		const { priceData, sqrmData } = this.state;
+		const { priceData, sqrmData, isLoading } = this.state;
+		if (isLoading === true) {
+			return <MDSpinner className="spinner" size={40} />;
+		}
 		const displayPriceChart = priceData.length ? (
 			<DrawChart
 				chartData={this.state.priceData}
 				options={this.state.options}
 				title={`Avg price for the last 30 days in ${this.state.selectedOption.value}`}
-				colros={'red'}
 			/>
 		) : (
 			<p className="no-data"> Sorry no price data available now.... </p>
@@ -122,7 +128,6 @@ class CityChart extends Component {
 				chartData={this.state.sqrmData}
 				options={this.state.options}
 				title={`Avg price per sqrm for the last 30 days in ${this.state.selectedOption.value}`}
-				colros={'blue'}
 			/>
 		) : (
 			<p className="no-data"> Sorry no Square meter price data available now.... </p>

@@ -99,7 +99,7 @@ app.post('/upload', (req, res) => {
 			);
 		}
 	} catch (err) {
-		console.log('mood', err.message);
+		console.log(err);
 		res.status(400).end();
 	}
 });
@@ -112,7 +112,8 @@ app.get(`/citychart`, (req, res) => {
 		queryWhere = `WHERE city = "${city}"`;
 	}
 	db.query(
-		`select city, storing_date, avg_price, avgprice_sqrm, currency from city_stats ${queryWhere};`,
+		// `SELECT city, storing_date, avg_price, avgprice_sqrm, currency FROM city_stats ${queryWhere} GROUP BY storing_date;`,
+		`SELECT *, AVG(avg_price) AS averagePrice, AVG(avgprice_sqrm) AS averageSqrm FROM city_stats ${queryWhere} GROUP BY storing_date;`,
 		(err, result, fields) => {
 			if (err) {
 				res.send(err).end();
@@ -122,21 +123,30 @@ app.get(`/citychart`, (req, res) => {
 	);
 });
 app.get(`/searchcity`, (req, res) => {
+	// console.log('opt', req.query.page);
+	const page = req.query.page;
 	const city = req.query.city || null;
+	const offset = (page - 1) * 20;
+	const row_count = 20;
+	let callNext = true;
 	let queryWhere = '';
 
 	if (city) {
 		queryWhere = `WHERE location_city = "${city}"`;
 	}
-	db.query(`select * from houses ${queryWhere} limit 20;`, (err, result, fields) => {
+
+	db.query(`SELECT * FROM houses ${queryWhere} ORDER BY link DESC;`, (err, result, fields) => {
 		if (err) {
 			res.status(400).end();
 		}
-		res.json(result);
+		if (result.length < offset + row_count) callNext = false;
+		const arr = result.slice(offset, offset + row_count);
+		res.json({ callNext, arr });
 	});
 });
 
 app.get(`/cityname`, (req, res) => {
+	// console.log('city', req.query, req.body, req.headers);
 	db.query(`select location_city from houses;`, (err, result, fields) => {
 		if (err) {
 			res.status(400).end();

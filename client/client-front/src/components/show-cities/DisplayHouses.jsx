@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import SelectList from '../chart/SelectList';
+import MDSpinner from 'react-md-spinner';
 import moment from 'moment';
 import House from './House';
 moment().format();
@@ -9,7 +11,8 @@ class DisplayHouses extends Component {
 		options: [],
 		selectedOption: 'Athens-Center',
 		houses: [],
-		searchCity: 'Athens-Center'
+		page: 1,
+		callNext: false
 	};
 
 	updateState = (statsArray) => {
@@ -30,16 +33,41 @@ class DisplayHouses extends Component {
 	}
 
 	handleSelectChange = (selectedOption) => {
-		this.setState({ selectedOption });
+		this.setState({
+			page: 1,
+			selectedOption
+		});
 
-		fetch(`http://localhost:3120/searchcity?city=${selectedOption.value}`)
+		setTimeout(() => {
+			fetch(`http://localhost:3120/searchcity?city=${selectedOption.value}&page=${this.state.page}`)
+				.then((res) => res.json())
+				.then((data) => {
+					this.updateState(data.arr);
+					this.setState({ callNext: data.callNext });
+				})
+				.catch((err) => console.log(err));
+		}, 10);
+	};
+	next = (cityValue) => {
+		const page = this.state.page + 1;
+		fetch(`http://localhost:3120/searchcity?city=${cityValue}&page=${page}`)
 			.then((res) => res.json())
-			.then((data) => this.updateState(data))
+			.then((data) => {
+				this.updateState(data.arr);
+				this.setState({ callNext: data.callNext });
+			})
 			.catch((err) => console.log(err));
+		this.setState({ page });
 	};
 
 	render() {
 		const { houses } = this.state;
+		if (!houses.length) {
+			return <MDSpinner className="spinner" size={40} />;
+		}
+		const renderNextButton = this.state.callNext ? (
+			<Button onClick={() => this.next(this.state.selectedOption.value)}>Next</Button>
+		) : null;
 		const renderingData = houses.length ? (
 			<House houses={houses} />
 		) : (
@@ -50,6 +78,7 @@ class DisplayHouses extends Component {
 			<div className="container">
 				<SelectList className="select" changeHandler={this.handleSelectChange} />
 				{renderingData}
+				{renderNextButton}
 			</div>
 		);
 	}
