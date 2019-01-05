@@ -1,5 +1,4 @@
 .navbar-inverse {
-	/* need*/
 	background-image: linear-gradient(to bottom, #3c3c3c 0, #bc5a45 100%);
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-color: #222;
@@ -9,104 +8,91 @@
 	font-size: 16px;
 }
 .navbar-right {
-	/* need*/
 	margin-right: 10px;
 }
 .page-header {
-	/* need*/
 	border-top: 1px solid #3c3c3c;
 	border-bottom: 1px solid #3c3c3c;
 	padding: 2px;
 }
 .page-header h1 {
-	/* need*/
 	color: rgb(5, 19, 0);
 }
 .notfound-header1 {
-	/* need*/
 	color: rgb(253, 19, 0);
 	text-align: center;
 }
 .notfound-header2 {
-	/* need*/
 	color: gray;
 	text-align: center;
 }
 div.jumbotron {
-	/* need*/
 	background: url("https://www.spiti24.gr/modules/spiti24/images/hero/residential.jpg");
 	height: 350px;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
 .jumbotron h1 {
-	/* need*/
 	font-size: 18px;
 	font-weight: bold;
 	color: rgba(78, 76, 177, 0.8);
 	margin-top: 260px;
 }
 .select {
-	/* need*/
 	padding: 20px;
 	width: 50%;
 	margin-left: 25%;
 }
 .spinner {
-	/* need */
 	margin-left: 50%;
 	margin-right: 50%;
 }
 .file-form {
-	/* need*/
 	padding: 20px;
 	width: 75%;
 	margin-left: 10%;
 }
 .file-form-label {
-	/* need*/
 	margin-left: 15px;
 	font-size: 20px;
 }
 .file-form-control {
-	/* need*/
 	height: 150px;
 	margin: 10px;
 }
 
 .btn.btn-success {
-	/* need*/
 	margin-left: 15px;
 }
+.btn.btn-primary {
+	float: right;
+	width: 10%;
+	margin-bottom: 10px;
+	margin-right: 70px;
+}
 .api-form {
-	/* need*/
 	padding: 20px;
 	width: 75%;
 	margin-left: 10%;
 }
 .api-form-label {
-	/* need*/
 	margin-left: 15px;
 	font-size: 20px;
 }
 .api-form-control {
-	/* need*/
 	height: 50px;
 	margin: 10px;
 }
 .panel.panel-default {
-	/* need*/
 	font-size: 100px;
 	margin-left: auto;
 	margin-right: auto;
 }
 div.panel-body {
-	/* need*/
 	font-size: 16px;
 }
 
 div.panel-title {
-	/* need*/
 	padding: 3px;
 	font-weight: bold;
 	font-size: 17px;
@@ -114,30 +100,24 @@ div.panel-title {
 	text-align: center;
 }
 .panel1-width {
-	/* need*/
 	width: 80%;
 }
 .panel2-width {
-	/* need*/
 	width: 70%;
 }
 .panel3-width {
-	/* need*/
 	width: 60%;
 }
 .panel4-width {
-	/* need*/
 	width: 50%;
 }
 
 .list-item {
-	/* need*/
 	font-size: 16px;
 	padding: 10px;
 	margin: 3px;
 }
 .each-house {
-	/* need*/
 	width: 46%;
 	height: 350px;
 	background-color: white;
@@ -148,25 +128,21 @@ div.panel-title {
 }
 
 #show-houses-container {
-	/* need*/
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 }
 
 .list-item-title {
-	/* need*/
 	font-weight: bold;
 	color: gray;
 	margin-right: 2px;
 }
 .list-group {
-	/* need*/
 	list-style: none;
 }
 
 .carousel-inner {
-	/* need*/
 	width: 600px;
 	height: 450px;
 	margin-left: auto;
@@ -174,7 +150,6 @@ div.panel-title {
 }
 
 .image {
-	/* need*/
 	width: 100%;
 	height: auto;
 	border-radius: 8px;
@@ -183,33 +158,28 @@ div.panel-title {
 }
 
 .slider.carousel.slide {
-	/* need*/
 	margin-left: auto;
 	margin-right: auto;
 	height: 450px;
 	width: auto;
 }
 .slider-main {
-	/* need*/
 	margin-left: auto;
 	margin-right: auto;
 	width: 800px;
 }
 .description {
-	/* need*/
 	margin-top: 40px;
 	font-weight: bold;
 	text-align: center;
 }
 .description-par {
-	/* need*/
 	text-align: center;
 	font-family: sans-serif;
 	font-size: 16px;
 	padding: 5px;
 }
 #accordion-uncontrolled-example {
-	/* need*/
 	margin-top: 10px;
 	font-family: sans-serif;
 }
@@ -219,7 +189,6 @@ div.panel-title {
 	font-size: 17px;
 }
 .btn.btn-danger {
-	/* need*/
 	position: absolute;
 	margin-bottom: 5px;
 }
@@ -227,36 +196,29 @@ div.panel-title {
 	margin-bottom: 5px;
 }
 .cont-report {
-	/* need*/
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 	margin-bottom: 30px;
 }
 .valid {
-	/* need*/
 	font-weight: bold;
 	color: #d64161;
 	font-style: italic;
 }
 .report-list {
-	/* need*/
 	list-style: none;
 }
 .report-item {
-	/* need*/
 	padding: 12px;
 	font-size: 16px;
 }
 .cont-report-header {
-	/* need*/
 	color: gray;
 }
 .report-p {
-	/* need*/
 	font-size: 16px;
 }
 .no-data {
-	/* need*/
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 18px;
@@ -264,13 +226,45 @@ div.panel-title {
 	margin-top: 100px;
 }
 .price-heading {
-	/* need*/
 	color: #bc5a45;
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 }
+.readme-header {
+	text-align: center;
+	color: rgb(2, 4, 76);
+	padding: 10px;
+	margin-bottom: 25px;
+}
+.readme-paragraph {
+	line-height: 20px;
+	font-size: 16px;
+	padding: 5px;
+}
+.instructions-header {
+	color: rgb(1, 30, 83);
+	padding: 10px;
+}
+.readme-ordered {
+	font-size: 16px;
+	line-height: 25px;
+	font-weight: bold;
+}
+.unordered-item {
+	font-size: 14px;
+}
+.readme-unordered {
+	list-style: disc;
+}
+.readme-end {
+	font-size: 16px;
+	padding: 5px;
+}
+.next {
+	float: right;
+	color: red;
+}
 @media screen and (max-width: 720px) {
-	/* need*/
 	.jumbo-container {
 		width: 100%;
 		height: 350px;
@@ -294,7 +288,6 @@ div.panel-title {
 	}
 }
 @media screen and (max-width: 1000px) {
-	/* need*/
 	.slider-main {
 		width: auto;
 	}

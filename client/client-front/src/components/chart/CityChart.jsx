@@ -34,9 +34,9 @@ class CityChart extends Component {
 		},
 		selectedOption: 'Athens-Center',
 		priceData: [],
-		sqrmData: [],
-		isLoading: false
+		sqrmData: []
 	};
+
 	componentDidMount() {
 		this.handleSelectChange({ value: 'Athens-Center' });
 	}
@@ -95,13 +95,12 @@ class CityChart extends Component {
 
 		this.setState({
 			priceData: [ [ 'storingDate', 'AvgPrice' ], ...updatedPriceData ],
-			sqrmData: [ [ 'storingDate', 'avgSqrmPrice' ], ...UpdateSqrmData ],
-			isLoading: false
+			sqrmData: [ [ 'storingDate', 'avgSqrmPrice' ], ...UpdateSqrmData ]
 		});
 	};
 
 	handleSelectChange = async (selectedOption) => {
-		await this.setState({ selectedOption, isLoading: true });
+		await this.setState({ selectedOption });
 
 		fetch(`http://localhost:3120/citychart?city=${selectedOption.value}`)
 			.then((res) => res.json())
@@ -110,33 +109,34 @@ class CityChart extends Component {
 	};
 
 	render() {
-		const { priceData, sqrmData, isLoading } = this.state;
-		if (isLoading === true) {
-			return <MDSpinner className="spinner" size={40} />;
-		}
-		const displayPriceChart = priceData.length ? (
-			<DrawChart
-				chartData={this.state.priceData}
-				options={this.state.options}
-				title={`Avg price for the last 30 days in ${this.state.selectedOption.value}`}
-			/>
-		) : (
-			<p className="no-data"> Sorry no price data available now.... </p>
-		);
-		const displaySqrmChart = sqrmData.length ? (
-			<DrawChart
-				chartData={this.state.sqrmData}
-				options={this.state.options}
-				title={`Avg price per sqrm for the last 30 days in ${this.state.selectedOption.value}`}
-			/>
-		) : (
-			<p className="no-data"> Sorry no Square meter price data available now.... </p>
-		);
+		const { priceData, sqrmData } = this.state;
+		//could not use check loading from state to display
+		const displayCharts =
+			priceData.length & sqrmData.length ? (
+				<React.Fragment>
+					<DrawChart
+						chartData={this.state.priceData}
+						options={this.state.options}
+						title={`Avg price for the last 30 days in ${this.state.selectedOption.value}`}
+					/>
+					<DrawChart
+						chartData={this.state.sqrmData}
+						options={this.state.options}
+						title={`Avg price per sqrm for the last 30 days in ${this.state.selectedOption.value}`}
+					/>
+				</React.Fragment>
+			) : (
+				<React.Fragment>
+					<p className="no-data"> Sorry no price data available now.... </p>
+					<MDSpinner className="spinner" size={40} />
+				</React.Fragment>
+			);
+
 		return (
 			<div>
 				<SelectList className="select" changeHandler={this.handleSelectChange} />
 				<h2 className="price-heading">{`Price trend in ${this.state.selectedOption.value}`}</h2>
-				{displayPriceChart} {displaySqrmChart}
+				{displayCharts}
 			</div>
 		);
 	}

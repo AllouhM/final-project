@@ -32,21 +32,18 @@ class DisplayHouses extends Component {
 		this.handleSelectChange({ value: 'Athens-Center' });
 	}
 
-	handleSelectChange = (selectedOption) => {
-		this.setState({
+	handleSelectChange = async (selectedOption) => {
+		await this.setState({
 			page: 1,
 			selectedOption
 		});
-
-		setTimeout(() => {
-			fetch(`http://localhost:3120/searchcity?city=${selectedOption.value}&page=${this.state.page}`)
-				.then((res) => res.json())
-				.then((data) => {
-					this.updateState(data.arr);
-					this.setState({ callNext: data.callNext });
-				})
-				.catch((err) => console.log(err));
-		}, 10);
+		fetch(`http://localhost:3120/searchcity?city=${selectedOption.value}&page=${this.state.page}`)
+			.then((res) => res.json())
+			.then((data) => {
+				this.updateState(data.arr);
+				this.setState({ callNext: data.callNext });
+			})
+			.catch((err) => console.log(err));
 	};
 	next = (cityValue) => {
 		const page = this.state.page + 1;
@@ -62,16 +59,19 @@ class DisplayHouses extends Component {
 
 	render() {
 		const { houses } = this.state;
-		if (!houses.length) {
-			return <MDSpinner className="spinner" size={40} />;
-		}
+
 		const renderNextButton = this.state.callNext ? (
-			<Button onClick={() => this.next(this.state.selectedOption.value)}>Next</Button>
+			<Button bsStyle="primary" onClick={() => this.next(this.state.selectedOption.value)}>
+				Next
+			</Button>
 		) : null;
 		const renderingData = houses.length ? (
 			<House houses={houses} />
 		) : (
-			<p className="no-data">Currently there are no houses available</p>
+			<React.Fragment>
+				<p className="no-data"> Sorry no houses data available now.... </p>
+				<MDSpinner className="spinner" size={40} />
+			</React.Fragment>
 		);
 
 		return (

@@ -6,22 +6,22 @@ const validator = require('validator');
 const validateData = (propertyData, i) => {
 	if (
 		typeof propertyData['link'] == 'undefined' ||
-		propertyData['link'] == '' ||
 		typeof propertyData['location'].city == 'undefined' ||
-		propertyData['location'].city == '' ||
 		typeof propertyData['location'].country == 'undefined' ||
-		propertyData['location'].country == '' ||
 		typeof propertyData['size'].rooms == 'undefined' ||
-		propertyData['size'].rooms == '' ||
 		typeof propertyData['price'].value == 'undefined' ||
-		propertyData['price'].value == '' ||
-		typeof propertyData['price'].currency == 'undefined' ||
-		propertyData['price'].currency == '' ||
-		typeof propertyData['location'].coordinates == 'undefined' ||
-		/^$/.test(propertyData['location'].city) ||
-		/^$/.test(propertyData['location'].country) ||
+		typeof propertyData['price'].currency == 'undefined'
+	) {
+		return false;
+	}
+	if (
+		// check if it empty string
 		/^$/.test(propertyData['link']) ||
-		/^$/.test()
+		/^$/.test(propertyData['location'].country) ||
+		/^$/.test(propertyData['location'].city) ||
+		/^$/.test(propertyData['price'].value) ||
+		/^$/.test(propertyData['price'].currency) ||
+		/^$/.test(propertyData['size'].rooms)
 	) {
 		return false;
 	}
@@ -29,7 +29,7 @@ const validateData = (propertyData, i) => {
 	if (!validator.isURL(propertyData['link'])) {
 		return false;
 	}
-	if (typeof propertyData['market_date'] == 'undefined') {
+	if (typeof propertyData['market_date'] == 'undefined' || /^$/.test(propertyData['market_date'])) {
 		return (propertyData['market_date'] = new Date());
 	}
 
@@ -43,6 +43,7 @@ const validateEntries = (data) => {
 	return data.filter(validateData);
 };
 const normalizeRow = (data, i) => {
+	// check if there is characters return null
 	if (
 		!/^[0-9]*(\.[0-9]{1,15})?$/.test(data['location'].coordinates.lng) ||
 		/^$/.test(data['location'].coordinates.lng) ||
@@ -56,10 +57,7 @@ const normalizeRow = (data, i) => {
 		data['location'].coordinates.lng = Number(data['location'].coordinates.lng);
 	}
 
-	if (data['market_date'] == '') {
-		data['market_date'] = new Date();
-	}
-
+	// unify dates received in one format
 	if (moment(data['market_date'], 'MM-DD-YYYY', true).isValid()) {
 		data['market_date'] = moment(data['market_date'], 'MM-DD-YYYY').format('YYYY-MM-DD');
 	}

@@ -20,9 +20,7 @@ const db = mysql.createConnection({
 
 app.post('/upload', (req, res) => {
 	try {
-		// return console.log(req.body.houses);
 		const data = validateEntries(req.body.houses);
-
 		res
 			.json({
 				processed: req.body.houses.length,
@@ -112,7 +110,6 @@ app.get(`/citychart`, (req, res) => {
 		queryWhere = `WHERE city = "${city}"`;
 	}
 	db.query(
-		// `SELECT city, storing_date, avg_price, avgprice_sqrm, currency FROM city_stats ${queryWhere} GROUP BY storing_date;`,
 		`SELECT *, AVG(avg_price) AS averagePrice, AVG(avgprice_sqrm) AS averageSqrm FROM city_stats ${queryWhere} GROUP BY storing_date;`,
 		(err, result, fields) => {
 			if (err) {
@@ -122,8 +119,8 @@ app.get(`/citychart`, (req, res) => {
 		}
 	);
 });
+
 app.get(`/searchcity`, (req, res) => {
-	// console.log('opt', req.query.page);
 	const page = req.query.page;
 	const city = req.query.city || null;
 	const offset = (page - 1) * 20;
@@ -146,7 +143,6 @@ app.get(`/searchcity`, (req, res) => {
 });
 
 app.get(`/cityname`, (req, res) => {
-	// console.log('city', req.query, req.body, req.headers);
 	db.query(`select location_city from houses;`, (err, result, fields) => {
 		if (err) {
 			res.status(400).end();

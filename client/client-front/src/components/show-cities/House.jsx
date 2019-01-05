@@ -41,7 +41,6 @@ class House extends Component {
 						<Button bsStyle="danger">More details about property</Button>
 					</Link>
 				</div>
-				// </div>
 			);
 		});
 		return <div id="show-houses-container">{eachHouse}</div>;
