@@ -66,7 +66,7 @@ class CityChart extends Component {
 
 		const currentDay = new Date();
 
-		let daysRangeDisplayed = moment(currentDay).subtract(14, 'd').format('YYYY-MM-DD');
+		let daysRangeDisplayed = moment(currentDay).subtract(15, 'd').format('YYYY-MM-DD');
 
 		const days = [];
 		while (moment(daysRangeDisplayed).isBefore(currentDay)) {
